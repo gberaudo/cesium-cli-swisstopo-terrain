@@ -1,0 +1,3 @@
+[submodule "modules/stk_tiles_dumper"]
+	path = modules/stk_tiles_dumper
+	url = git@github.com:gberaudo/stk_tiles_dumper.git

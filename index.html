@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.75/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.75/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="divinspector" style="position: absolute; z-index: 100"></div>
+  <div id="cesiumContainer" style="width: 100vw;height:100vh"></div>
+  <script>
+    var osm = new Cesium.OpenStreetMapImageryProvider({
+      url : 'https://a.tile.openstreetmap.org/'
+    });
+    const terrainProvider = new Cesium.CesiumTerrainProvider({
+      url: 'outputs/wabern_tiles/'
+    });
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+      imageryProvider: osm,
+      terrainProvider
+    });
+    new Cesium.CesiumInspector('divinspector', viewer.scene);
+    viewer.scene.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(7.45759, 46.92977, 15500)
+    });
+
+    const eventHandler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);
+    eventHandler.setInputAction((movement) => {
+      const rayStart = viewer.camera.getPickRay(movement.startPosition);
+      const position = viewer.scene.globe.pick(rayStart, viewer.scene);
+      if (!position) return;
+      const carto = Cesium.Cartographic.fromCartesian(position);
+      const height = viewer.scene.globe.getHeight(carto);
+      console.log(180 * carto.longitude / Math.PI, 180 * carto.latitude / Math.PI, carto.height, height);
+    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
+
+  </script>
+</body>
+</html>
