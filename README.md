@@ -18,7 +18,7 @@ ln -s ...../cesium-cli
 
 - get submodules
 ```
-git submodules --init
+git submodule init
 ```
 
 - get sample data from the Swisstopo shop
