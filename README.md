@@ -12,19 +12,28 @@ https://map.geo.admin.ch/?lang=en&topic=ech&bgLayer=ch.swisstopo.pixelkarte-farb
 ## Instructions
 
 - create a simlink to the CLI
+```
 ln -s ...../cesium-cli
+```
 
 - get submodules
+```
 git submodules --init
+```
 
 - get sample data from the Swisstopo shop
+```
 ./get_samples.sh
+```
 
 - generate the terrain tiles
+```
 ./generate_terrain.sh
+```
 
 - Serve the tiles
+```
 python serve.py
+```
 
 - Navigate http://localhost:8000
-
