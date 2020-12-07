@@ -18,7 +18,9 @@
       url : 'https://a.tile.openstreetmap.org/'
     });
     const terrainProvider = new Cesium.CesiumTerrainProvider({
-      url: 'outputs/wabern_tiles/'
+      //url: 'outputs/wabern_tiles/'
+      //url: 'outputs/ticino-0.5/'
+      url: 'outputs/ch-2m/'
     });
     var viewer = new Cesium.Viewer('cesiumContainer', {
       imageryProvider: osm,
@@ -26,7 +28,8 @@
     });
     new Cesium.CesiumInspector('divinspector', viewer.scene);
     viewer.scene.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(7.45759, 46.92977, 15500)
+      // destination: Cesium.Cartesian3.fromDegrees(7.45759, 46.92977, 15500)
+      destination: Cesium.Cartesian3.fromDegrees(8.59731552387385, 46.148784712850734, 1500)
     });
 
     const eventHandler = new Cesium.ScreenSpaceEventHandler(viewer.canvas);
